@@ -4,7 +4,7 @@ import LoginForm from "./components/LoginForm";
 function App() {
   return (
     <div className="App">
-      <h1>Welcome RB</h1>
+      <h1 align="center">Welcome RB</h1>
       <LoginForm />
     </div>
   );
