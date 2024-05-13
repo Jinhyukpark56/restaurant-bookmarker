@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "./LoginForm.css";
+
+import "./styles/LoginForm.css";
 
 function LoginForm() {
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState("");
 
   const [isSignUpMode, setSignUpMode] = useState(false);
   const [newUseremail, setNewUseremail] = useState("");
@@ -16,8 +17,6 @@ function LoginForm() {
     if (useremail === "admin" && password === "password") {
       setIsLoggedIn(true);
       alert("환영합니다.");
-    } else {
-      alert("사용자의 이메일 또는 비밀번호가 잘못되었습니다. 다시 입력하세요.");
     }
   };
 
