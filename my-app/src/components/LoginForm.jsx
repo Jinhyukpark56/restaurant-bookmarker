@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-
+import { Redirect } from "react-router-dom";
 import "./styles/LoginForm.css";
 
 function LoginForm() {
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isLoggedIn, setIsLoggedIn] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [isSignUpMode, setSignUpMode] = useState(false);
   const [newUseremail, setNewUseremail] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +23,7 @@ function LoginForm() {
 
   const handleSignUpSubmit = (event) => {
     event.preventDefault();
-    if (newUseremail && newPassword) {
+    if (newUseremail && newPassword && newPassword === confirmPassword) {
       alert("회원가입이 완료 되었습니다. 로그인하세요.");
       setSignUpMode(false);
     } else {
@@ -45,12 +46,18 @@ function LoginForm() {
       setNewUseremail(value);
     } else if (name === "newPassword") {
       setNewPassword(value);
+    } else if (name === "cofrimPassword") {
+      setConfirmPassword(value);
     }
   };
 
   const toggleSignUpMode = () => {
     setSignUpMode(!isSignUpMode);
   };
+
+  if (isLoggedIn) {
+    return <Redirect to="/MainPage" />;
+  }
 
   return (
     <div>
@@ -85,11 +92,11 @@ function LoginForm() {
                 </label>
                 <br />
                 <label>
-                  Check The New Password:
+                  Confirm Password:
                   <input
                     type="password"
-                    name="newPassword"
-                    value={newPassword}
+                    name="confirmPassword"
+                    value={confirmPassword}
                     onChange={handleSignUpInputChange}
                     required
                   />
