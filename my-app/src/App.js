@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import MainPage from "./components/MainPage";
 
@@ -8,10 +8,10 @@ function App() {
     <Router>
       <div className="App">
         <h1 align="center">Welcome RB</h1>
-        <Switch>
-          <Route exact path="/" component={LoginForm} />
-          <Route path="/MainPage" component={MainPage} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/mainpage" element={<MainPage />} />
+        </Routes>
       </div>
     </Router>
   );

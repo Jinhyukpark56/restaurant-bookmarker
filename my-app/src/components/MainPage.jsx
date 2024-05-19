@@ -1,24 +1,21 @@
-import React, { useState } from "react";
-import SearchBox from "./SearchBox";
+import React from "react";
+import SearchBox from "./SearchBox"; // Assuming you have a SearchBox component
 
 const MainPage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = () => {
-    // 검색 로직
+  const handleLogout = () => {
+    localStorage.setItem("isLoggedIn", "false");
+    window.location.href = "/";
   };
 
   return (
     <div className="main-page">
       <div className="left-section">
-        <SearchBox
-          searchQuery={searchQuery}
-          onSearchQueryChange={setSearchQuery}
-          onSearch={handleSearch}
-        />
+        <SearchBox />
       </div>
-      <div className="right-section"></div>
-      {/*맵 로드 구간*/}
+      <div className="right-section">
+        <h2>Map will be displayed here</h2>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
     </div>
   );
 };
