@@ -12,12 +12,23 @@ function LoginForm() {
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
-    const storedUser = localStorage.getItem(useremail);
-    const userData = storedUser && JSON.parse(storedUser);
+    const trimmedUseremail = useremail.trim();
+    const storedUser = localStorage.getItem(trimmedUseremail);
+    console.log("Stored user retrieved:", storedUser); // 디버깅 로그
 
-    if (userData && userData.password === password) {
-      alert("환영합니다.");
-      navigate("/mainpage");
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      console.log("Parsed user data:", userData); // 디버깅 로그
+
+      if (userData.password === password) {
+        alert("환영합니다.");
+        console.log("Navigating to /mainpage"); // 디버깅 로그
+        navigate("/mainpage"); // 절대 경로 사용
+      } else {
+        alert(
+          "사용자의 이메일 또는 비밀번호가 잘못되었습니다. 다시 입력하세요."
+        );
+      }
     } else {
       alert("사용자의 이메일 또는 비밀번호가 잘못되었습니다. 다시 입력하세요.");
     }
@@ -25,11 +36,16 @@ function LoginForm() {
 
   const handleSignUpSubmit = (event) => {
     event.preventDefault();
-    if (newUseremail && newPassword) {
+    const trimmedNewUseremail = newUseremail.trim();
+    if (trimmedNewUseremail && newPassword) {
       localStorage.setItem(
-        newUseremail,
+        trimmedNewUseremail,
         JSON.stringify({ password: newPassword })
       );
+      console.log("New user registered:", {
+        newUseremail: trimmedNewUseremail,
+        newPassword,
+      }); // 디버깅 로그
       alert("회원가입이 완료 되었습니다. 로그인하세요.");
       setSignUpMode(false);
     } else {

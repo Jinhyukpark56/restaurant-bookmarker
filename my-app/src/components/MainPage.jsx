@@ -1,10 +1,13 @@
 import React from "react";
-import SearchBox from "./SearchBox"; // Assuming you have a SearchBox component
+import { useNavigate } from "react-router-dom";
+import SearchBox from "./SearchBox";
 
 const MainPage = () => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.setItem("isLoggedIn", "false");
-    window.location.href = "/";
+    navigate("/");
   };
 
   return (
